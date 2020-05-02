@@ -40,7 +40,7 @@ public class RPCTest {
     }
 
     private static void test3() {
-        String phone = "13714189246";
+        String phone = "13788888888";
         String token = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySW5mbyI6eyJpZCI6NDYzMzg1Njk4Njc4ODY1OTk0LCJ1c2VybmFtZSI6InBhc3N3b3JkMTIzNDU2IiwicGFzc3dvcmQiOm51bGwsIm5hbWUiOiJjMjNiNWRkMS0xMjY1LTQ2ZjUtODI5NS1iZTZjNGI3MmRkNWIiLCJhZ2UiOjY2LCJzZXgiOjEsImJpcnRoZGF5IjoxNTg4NDA5MzUzMDAwLCJub3RlIjoiMmYyNzk1NmMtNDcwYS00NzUwLTlmY2YtZDQ5Yjk2NDkxZGZiIiwiY3JlYXRlVGltZSI6MTU4ODQwOTM1MzAwMCwidXBkYXRlVGltZSI6MTU4ODQwOTM1MzAwMH19.ACtMOnr_SnGjkaSDyIXx8xakXuiHLWFlYAzbCo_s3qfXkSpzwVDW7sY4bTSQAzrVVLHWQGcOolDXIJgyMpQd4Q";
         Map userInfo = Jwts.parser().setSigningKey(phone).parseClaimsJws(token).getBody().get("userInfo", Map.class);
         System.out.println(userInfo);
