@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.TitleMapper">
+
+    <resultMap id="baseResutMap" type="com.much.it.entity.Title">
+        <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="from_date" jdbcType="TIMESTAMP" property="fromDate"/>
+        <result column="to_date" jdbcType="TIMESTAMP" property="toDate"/>
+    </resultMap>
+
+    <sql id="selectField">
+        emp_no,title,from_date,to_date
+    </sql>
+
+
+    <select id="selectById" resultMap="baseResutMap" parameterType="com.much.it.entity.User">
+        select
+        <include refid="selectField"></include>
+        from title
+        <where>
+            emp_no = #{empNo,jdbcType=BIGINT}
+        </where>
+    </select>
+
+    <insert id="insertTitle" parameterType="java.util.List">
+        insert into title (
+            emp_no,
+            title,
+            from_date,
+            to_date
+        )
+        values (
+            #{empNo,jdbcType=BIGINT},
+            #{title,jdbcType=VARCHAR},
+            #{fromData,jdbcType=TIMESTAMP},
+            #{toDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch">
+        insert into title (
+            emp_no,
+            title,
+            from_date,
+            to_date
+        )
+        <foreach collection="list" item="title" open="values (" separator="),(" close=")">
+            #{title.empNo,jdbcType=BIGINT},
+            #{title.title,jdbcType=VARCHAR},
+            #{title.fromDate,jdbcType=TIMESTAMP},
+            #{title.toDate,jdbcType=TIMESTAMP}
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll">
+        delete from title
+    </delete>
+
+    <delete id="deleteByEmpNo">
+        delete from title
+        <where>
+            emp_no = #{empNo,jdbcType=BIGINT}
+        </where>
+    </delete>
+
+    <select id="findAll" resultMap="baseResutMap">
+        select
+        <include refid="selectField"></include>
+        from title
+    </select>
+</mapper>

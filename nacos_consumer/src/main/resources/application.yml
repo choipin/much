@@ -1,0 +1,47 @@
+server:
+  port: 8082
+
+mybatis:
+  type-aliases-package: com.much.it.entity
+  mapper-locations:
+    - classpath:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+spring:
+  application:
+    name: nacos-consumer
+  datasource:
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/order?characterEncoding=utf8&allowMulitQueries=true&useSSL=false&serverTimezone=UTC
+          username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
+          password: ENC(GEQV1X7/AVp6absLAk10jg==)
+        mysql:
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/sell?characterEncoding=utf8&allowMulitQueries=true&useSSL=false&serverTimezone=UTC
+          username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
+          password: ENC(GEQV1X7/AVp6absLAk10jg==)
+        postgresql:
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/user?characterEncoding=utf8&allowMulitQueries=true&useSSL=false&serverTimezone=UTC
+          username: ENC(Dr/w5QMBxINNYhqbt11JPA==)
+          password: ENC(T2Lth804gBG6ZLWhBBEUbQ==)
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true
+
+
+

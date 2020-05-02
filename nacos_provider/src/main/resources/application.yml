@@ -1,0 +1,85 @@
+server:
+  port: 8081
+
+mybatis:
+  mapper-locations:
+    - classpath:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.much.it.entity
+
+spring:
+  application:
+    name: nacos-provinder
+  shardingsphere:
+    datasource:
+      names: shard00,shard01,shard02
+      shard00:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/shard00?charactorEncoding=utf8&allowMulitQueries=true&useSSL=false&serverTimezone=UTC
+        username: ENC(ER7HOgogyhBaOnoJxOg62w==)
+        password: ENC(s0RaN2O014uVrq8CpF2JMg==)
+        type: com.alibaba.druid.pool.DruidDataSource
+      shard01:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/shard01?charactorEncoding=utf8&allowMulitQueries=true&useSSL=false&serverTimezone=UTC
+        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
+        password: ENC(GEQV1X7/AVp6absLAk10jg==)
+        type: com.alibaba.druid.pool.DruidDataSource
+      shard02:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/shard02?charactorEncoding=utf8&allowMulitQueries=true&useSSL=false&serverTimezone=UTC
+        username: ENC(Dr/w5QMBxINNYhqbt11JPA==)
+        password: ENC(T2Lth804gBG6ZLWhBBEUbQ==)
+        type: com.alibaba.druid.pool.DruidDataSource
+    sharding:
+      default-database-strategy:
+        inline:
+          sharding-column: id
+          algorithm-expression: shard0$->{id % 3}
+      tables:
+        user:
+          actualDataNodes: shard0$->{0..2}.user_0$->{0..2}
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              algorithmExpression: user_0$->{id % 3}
+          keyGenerator:
+            type: SNOWFLAKE
+            column: id
+      binding-tables: user
+#    encrypt:
+#      encryptors:
+#        encryptor_aes:
+#          type: aes
+#          props:
+#            aes.key.value: 123456
+#      tables:
+#        user:
+#          colums:
+#            password:
+#              plainColumn: password_plain
+#              cipherColumn: password_cipher
+#              encryptor: encryptor_aes
+
+    props:
+      sql:
+        show: true
+      query:
+        with:
+          chipher:
+            comlum: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6379
+
+
+

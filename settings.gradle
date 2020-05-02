@@ -1,0 +1,5 @@
+rootProject.name = 'much'
+include 'common'
+include 'nacos_consumer'
+include 'nacos_provider'
+
