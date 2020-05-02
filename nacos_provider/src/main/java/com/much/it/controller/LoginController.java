@@ -20,7 +20,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping("/verification")
+    @GetMapping("/verification/{phone}")
     @Pattern(regexp = "^[1]([3-9])[0-9]{9}$",message = "please put a phone number")
     public Map<String,String> getPublicSerek(@PathVariable("phone") String phone){
         return loginService.verification(phone);

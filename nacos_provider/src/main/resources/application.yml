@@ -78,8 +78,11 @@ spring:
         dashboard: localhost:8080
       eager: true
   redis:
-    cluster:
-      nodes: 127.0.0.1:6379
+    host: localhost
+
+#  redis:
+#    cluster:
+#      nodes: localhost:6379
 
 
 

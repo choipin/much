@@ -21,7 +21,7 @@ import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Map;
 
 /**
@@ -34,29 +34,30 @@ import java.util.Map;
 @Slf4j
 public class RPCTest {
     public static void main(String[] args) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidKeySpecException {
-        test1();
-        test2();
+        //test1();
+        //test2();
         test3();
     }
 
     private static void test3() {
         String phone = "13714189246";
-        String token = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1Hn/Mfw9kX8eeaHt/mgyNsR4JjaXEerfAuxdf25ev30KxrWP66MaeJp5yEkejcyfYpw6/cqNClQpCl9IvIDQxw7Qil6cjCrWX4gENy9NE0FepIWv7Esdhlf31iMWQgMEFKPBO+HUqNU7qvrBKsHfgHxm9hVIwbOucqtOkTmiHQwIDAQAB";
+        String token = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySW5mbyI6eyJpZCI6NDYzMzg1Njk4Njc4ODY1OTk0LCJ1c2VybmFtZSI6InBhc3N3b3JkMTIzNDU2IiwicGFzc3dvcmQiOm51bGwsIm5hbWUiOiJjMjNiNWRkMS0xMjY1LTQ2ZjUtODI5NS1iZTZjNGI3MmRkNWIiLCJhZ2UiOjY2LCJzZXgiOjEsImJpcnRoZGF5IjoxNTg4NDA5MzUzMDAwLCJub3RlIjoiMmYyNzk1NmMtNDcwYS00NzUwLTlmY2YtZDQ5Yjk2NDkxZGZiIiwiY3JlYXRlVGltZSI6MTU4ODQwOTM1MzAwMCwidXBkYXRlVGltZSI6MTU4ODQwOTM1MzAwMH19.ACtMOnr_SnGjkaSDyIXx8xakXuiHLWFlYAzbCo_s3qfXkSpzwVDW7sY4bTSQAzrVVLHWQGcOolDXIJgyMpQd4Q";
         Map userInfo = Jwts.parser().setSigningKey(phone).parseClaimsJws(token).getBody().get("userInfo", Map.class);
         System.out.println(userInfo);
     }
 
     private static void test2() throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-        String publicKey = "ssdefdsfaa";
+        String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnZ60Cnln6CqnNu4AiAYK46DVz2I2OmHjyk8TK4+il6V9l8masqbYhOn/kgMftv9Cj2NV/Gbxe//0Djvu9MteGLPUnJ1CUGEGw8zcsJRgEAO/cx+QIOTGLB38bHh3nE2kCr+/Sh5jmrpLdOvs0XGWhB8lLohqYTkaxO2ha5vMhR5+bFLrAmGq+S8wVn4f0B+KLRdkLI27iQrv/EqkkMi/TkcJs7/PhH+bEz5lGSVHMBdni2UKsIqET1ooHn2rxvltEVt2RySG8wEScyVXivlByJTcceyMC/oakgJCJChxpJI4RFUwRMKFkz6YpOqt8j6IwRVivlPr4byzRPz4wvSsFQIDAQAB";
         byte[] decodeBase64 = Base64.decodeBase64(publicKey);
-        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(decodeBase64);
+        //PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(decodeBase64);
+        X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(decodeBase64);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PublicKey publicKey1 = keyFactory.generatePublic(pkcs8EncodedKeySpec);
+        PublicKey publicKey1 = keyFactory.generatePublic(x509EncodedKeySpec);
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE,publicKey1);
         byte[] bytes = cipher.doFinal("password123456".getBytes());
         String rsaPassword = Base64.encodeBase64String(bytes);
-        System.out.printf("加密过的密yygy", rsaPassword);
+        System.out.println(rsaPassword);
     }
 
     private static void test1() {

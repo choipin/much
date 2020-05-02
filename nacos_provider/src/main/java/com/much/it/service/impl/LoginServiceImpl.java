@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -19,7 +20,7 @@ import javax.crypto.NoSuchPaddingException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class LoginServiceImpl implements LoginService {
             String privateKey = Base64.encodeBase64String(keyPair.getPrivate().getEncoded());
             String publicKey = Base64.encodeBase64String(keyPair.getPublic().getEncoded());
             String redisKey = String.format("user:login:phone:%s",phone);
-            redisTemplate.opsForValue().set(redisKey,privateKey,60*3, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(redisKey,privateKey,60*30, TimeUnit.SECONDS);
             HashMap<String, String> map = new HashMap<>();
             map.put("phone",phone);
             map.put("publicCode",publicKey);
@@ -65,15 +66,19 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String login(Map<String,String> map) {
         try {
-            String rsaPassword =  map.get("rsaPassword");
+            String rsaPassword =  map.get("password");
             String username =  map.get("username");
             String phone =  map.get("phone");
             String redisKey = String.format("user:login:phone:%s",phone);
             String privateKey = (String) redisTemplate.opsForValue().get(redisKey);
-            X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(Base64.decodeBase64(privateKey));
+            if (StringUtils.isEmpty(privateKey)){
+                throw new RuntimeException("privateKye is validate");
+            }
+            //X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(Base64.decodeBase64(privateKey));
+            PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(Base64.decodeBase64(privateKey));
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 
-            PrivateKey privateKey1 = keyFactory.generatePrivate(x509EncodedKeySpec);
+            PrivateKey privateKey1 = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.DECRYPT_MODE,privateKey1);
             byte[] bytes = cipher.doFinal(Base64.decodeBase64(rsaPassword));
