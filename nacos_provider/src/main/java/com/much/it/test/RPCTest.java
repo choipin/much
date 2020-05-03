@@ -36,7 +36,7 @@ public class RPCTest {
     public static void main(String[] args) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidKeySpecException {
         //test1();
         //test2();
-        test3();
+        //test3();
     }
 
     private static void test3() {
