@@ -68,7 +68,7 @@ spring:
       query:
         with:
           chipher:
-            comlum: true
+            column: true
   cloud:
     nacos:
       discovery:

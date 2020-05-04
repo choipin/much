@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.ProductMapper">
+
+    <resultMap id="baseResutMap" type="com.much.it.entity.Product">
+        <result column="product_id" jdbcType="BIGINT" property="productId"/>
+        <result column="product_price" jdbcType="DECIMAL" property="productPrice"/>
+        <result column="product_stock" jdbcType="INTEGER" property="productStock"/>
+        <result column="product_description" jdbcType="VARCHAR" property="productDescription"/>
+        <result column="product_icon" jdbcType="VARCHAR" property="productIcon"/>
+        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <result column="product_type" jdbcType="VARCHAR" property="productType"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="selectField">
+        product_id,product_price,product_stock,product_description ,product_icon,product_status,product_type,create_time,update_time
+    </sql>
+
+
+    <select id="selectByProductId" resultMap="baseResutMap" parameterType="com.much.it.entity.User">
+        select
+        <include refid="selectField"></include>
+        from product
+        <where>
+            product_id = #{productId,jdbcType=BIGINT}
+        </where>
+    </select>
+
+    <insert id="insertProduct" parameterType="java.util.List">
+        insert into product (
+              product_price,
+              product_stock,
+              product_description ,
+              product_icon,
+              product_status,
+              product_type,
+              create_time,
+              update_time
+        )
+        values (
+            #{productPrice,jdbcType=DECIMAL},
+            #{productStoke,jdbcType=INTEGER},
+            #{productDescription,jdbcType=VARCHAR},
+            #{productIcon,jdbcType=VARCHAR},
+            #{productStatus,jdbcType=INTEGER},
+            #{productType,jdbcType=INTEGER},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch">
+        insert into product (
+        product_price,
+        product_stock,
+        product_description ,
+        product_icon,
+        product_status,
+        product_type,
+        create_time,
+        update_time
+        )
+        <foreach collection="list" item="product" open="values (" separator="),(" close=")">
+            #{product.productPrice,jdbcType=DECIMAL},
+            #{product.productStoke,jdbcType=INTEGER},
+            #{product.productDescription,jdbcType=VARCHAR},
+            #{product.productIcon,jdbcType=VARCHAR},
+            #{product.productStatus,jdbcType=INTEGER},
+            #{product.productType,jdbcType=INTEGER},
+            #{product.createTime,jdbcType=TIMESTAMP},
+            #{product.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll">
+        delete from product
+    </delete>
+
+    <delete id="deleteById">
+        delete from product
+        <where>
+            product_id = #{productId,jdbcType=BIGINT}
+        </where>
+    </delete>
+
+    <select id="findAll" resultMap="baseResutMap">
+        select
+        <include refid="selectField"></include>
+        from product
+    </select>
+
+</mapper>
