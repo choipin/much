@@ -52,7 +52,9 @@ public class TCPHandler implements Runnable {
             socketChannel.write(buffer);
         }
         status = 0;
+        // 通過key改變通道註冊的事件
         selectionKey.interestOps(SelectionKey.OP_READ);
+        // 使一個阻塞住的selector操作立即返回
         selectionKey.selector().wakeup();
 
     }

@@ -5,7 +5,6 @@ import com.much.it.entity.PageVO;
 import com.much.it.entity.Product;
 import com.much.it.mapper.ProductMapper;
 import com.much.it.service.ProductService;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,13 +34,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @GlobalTransactional
+    //@GlobalTransactional
     public Integer insertProduct(Product product) {
         return productMapper.insertProduct(product);
     }
 
     @Override
-    @GlobalTransactional
+    //@GlobalTransactional
     public Integer insertBatch(Integer num) {
         List<Product> products = IntStream.range(0, num).boxed().map(integer -> Product.builder().createTime(new Date())
                 .productDescription(UUID.randomUUID().toString()).productIcon(UUID.randomUUID().toString())
@@ -52,13 +51,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @GlobalTransactional
+    //@GlobalTransactional
     public Integer deleteAll() {
         return productMapper.deleteAll();
     }
 
     @Override
-    @GlobalTransactional
+    //@GlobalTransactional
     public Integer deleteById(Long productId) {
         return productMapper.deleteById(productId);
     }

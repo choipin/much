@@ -3,7 +3,7 @@ server:
 
 mybatis:
   mapper-locations:
-    - classpath:mappers
+    - classpath:mappers/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
@@ -11,7 +11,48 @@ mybatis:
 
 spring:
   application:
-    name: seata
+    name: product-service-group
+  shardingsphere:
+    datasource:
+      names: product00,product01,product02
+      product00:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/product00?characterEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
+        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
+        password: ENC(GEQV1X7/AVp6absLAk10jg==)
+      product01:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/product01?characterEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
+        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
+        password: ENC(GEQV1X7/AVp6absLAk10jg==)
+      product02:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/product02?characterEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
+        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
+        password: ENC(GEQV1X7/AVp6absLAk10jg==)
+    sharding:
+      default-database-strategy:
+        inline:
+          sharding-column: product_id
+          algorithm-expression: product0$->{product_id % 3}
+      tables:
+        product:
+          actualDataNodes: product0$->{0..2}.t_product_0$->{0..2}
+          tableStrategy:
+            inline:
+              shardingColumn: product_id
+              algorithmExpression: t_product_0$->{product_id % 3}
+      binding-tables: product
+    props:
+      sql:
+        show: true
+      query:
+        with:
+          chipher:
+            column: true
   cloud:
     nacos:
       discovery:
@@ -21,45 +62,8 @@ spring:
         dashboard: 127.0.0.1:8080
       eager: true
 
-#    alibaba:
-#      seata:
-#        tx-service-group:
-  shardingsphere:
-    datasource:
-      names: product-00,product-02,product-02
-      product-00:
-        type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/product?charactorEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
-        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
-        password: ENC(GEQV1X7/AVp6absLAk10jg==)
-      product-01:
-        type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/product?charactorEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
-        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
-        password: ENC(GEQV1X7/AVp6absLAk10jg==)
-      product-02:
-        type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/product?charactorEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
-        username: ENC(R8xDcDANYoJwfbZxz+l/YA==)
-        password: ENC(GEQV1X7/AVp6absLAk10jg==)
-    sharding:
-      default-database-strategy:
-        inline:
-          sharding-column: product_id
-          algorithm-expression: product-0$->{product_id % 3}
-      tables:
-        product:
-          actualDataNodes: product-0$->{0..2}.product_0$->{0..2}
-          tableStrategy:
-            inline:
-              shardingColumn: product_id
-              algorithmExpression: product_0$->{product_id % 3}
-      binding-tables: product
-    props:
-      sql:
-        show: true
-      query:
-        with:
-          chipher:
-            column: true
+    alibaba:
+      seata:
+        tx-service-group: product-service-group
+
 
