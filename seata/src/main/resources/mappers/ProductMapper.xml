@@ -9,13 +9,13 @@
         <result column="product_description" jdbcType="VARCHAR" property="productDescription"/>
         <result column="product_icon" jdbcType="VARCHAR" property="productIcon"/>
         <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
-        <result column="product_type" jdbcType="VARCHAR" property="productType"/>
+        <result column="category_type" jdbcType="VARCHAR" property="categoryType"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
     <sql id="selectField">
-        product_id,product_price,product_stock,product_description ,product_icon,product_status,product_type,create_time,update_time
+        product_id,product_price,product_stock,product_description ,product_icon,product_status,category_type,create_time,update_time
     </sql>
 
 
@@ -35,17 +35,17 @@
               product_description ,
               product_icon,
               product_status,
-              product_type,
+              category_type,
               create_time,
               update_time
         )
         values (
             #{productPrice,jdbcType=DECIMAL},
-            #{productStoke,jdbcType=INTEGER},
+            #{productStock,jdbcType=INTEGER},
             #{productDescription,jdbcType=VARCHAR},
             #{productIcon,jdbcType=VARCHAR},
             #{productStatus,jdbcType=INTEGER},
-            #{productType,jdbcType=INTEGER},
+            #{categoryType,jdbcType=INTEGER},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
@@ -58,17 +58,17 @@
         product_description ,
         product_icon,
         product_status,
-        product_type,
+        category_type,
         create_time,
         update_time
         )
         <foreach collection="list" item="product" open="values (" separator="),(" close=")">
             #{product.productPrice,jdbcType=DECIMAL},
-            #{product.productStoke,jdbcType=INTEGER},
+            #{product.productStock,jdbcType=INTEGER},
             #{product.productDescription,jdbcType=VARCHAR},
             #{product.productIcon,jdbcType=VARCHAR},
             #{product.productStatus,jdbcType=INTEGER},
-            #{product.productType,jdbcType=INTEGER},
+            #{product.categoryType,jdbcType=INTEGER},
             #{product.createTime,jdbcType=TIMESTAMP},
             #{product.updateTime,jdbcType=TIMESTAMP}
         </foreach>

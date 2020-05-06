@@ -44,8 +44,8 @@ public class ProductServiceImpl implements ProductService {
     public Integer insertBatch(Integer num) {
         List<Product> products = IntStream.range(0, num).boxed().map(integer -> Product.builder().createTime(new Date())
                 .productDescription(UUID.randomUUID().toString()).productIcon(UUID.randomUUID().toString())
-                .productPrice(new BigDecimal(new Random().nextDouble())).productStatus(new Random().nextInt(1000))
-                .productStock(new Random().nextInt(3000)).productType(UUID.randomUUID().toString())
+                .productPrice(new BigDecimal(new Random().nextDouble())).productStatus(new Random().nextInt(1))
+                .productStock(new Random().nextInt(3000)).categoryType(UUID.randomUUID().toString().substring(0,19))
                 .updateTime(new Date()).build()).collect(Collectors.toList());
         return productMapper.insertBatch(products);
     }

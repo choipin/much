@@ -30,7 +30,7 @@ public class Product implements Serializable {
     private String productDescription;
     private String productIcon;
     private Integer productStatus;
-    private String productType;
+    private String categoryType;
     private Date createTime;
     private Date updateTime;
 }

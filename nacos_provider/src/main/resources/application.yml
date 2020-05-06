@@ -79,6 +79,12 @@ spring:
       eager: true
   redis:
     host: localhost
+rsa:
+  encrypt:
+    open: true
+    showLog: true
+    publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALUKxjhG3Fb1ytD9a5J4LrRTS4XrZQRwHzD/Jw4NTQGUTdz1OUjZVo1sS/90ZOjgYDHHRNRY/s1PmkCGfHu8CkUCAwEAAQ==
+    privateKey: MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAtQrGOEbcVvXK0P1rkngutFNLhetlBHAfMP8nDg1NAZRN3PU5SNlWjWxL/3Rk6OBgMcdE1Fj+zU+aQIZ8e7wKRQIDAQABAkAgy7LcvvlrR1tWQJIcFmlfgTdNKzdBdo4v8gjBIuewQT5u73OXGsDWLzBZh5qtCvbptWSm4kEwJjAoLNmfUkiBAiEA+vYLbiaV3AXSTg17MYwLoS8fetJnsTJtCWQ9Ufj+IncCIQC4rVd0DJA+0ngKLX1AByVk3HBG+5VbAjrh+VTblc5MIwIhAN5iDTrsojs4RWW4+IOtT9jjAwg5Tn1s68Y4t0XeWIR9AiBpGXVIvRGmPv9Dw4mhU6/LS8y2CN2B8q3yBoRthz7lgwIhAK2UH7++KJjg6KZJpj5WUAG9vnvLxiFAhjVIJM3yMo+E
 
 #  redis:
 #    cluster:
