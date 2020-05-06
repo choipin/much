@@ -3,4 +3,5 @@ include 'common'
 include 'nacos_consumer'
 include 'nacos_provider'
 include 'seata'
+include 'netty'
 
