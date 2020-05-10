@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.much.it'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'cn.shuibo:rsa-encrypt-body-spring-boot:1.0.1.RELEASE'
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:1.18"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.alibaba:druid-spring-boot-starter:1.1.22'
+    implementation 'org.apache.velocity:velocity-engine-core:2.0'
+    implementation  'com.baomidou:mybatisplus-spring-boot-starter:1.0.5'
+    implementation 'com.baomidou:mybatis-plus:2.2.0'
+    implementation 'com.alibaba:fastjson:1.2.40'
+    implementation 'mysql:mysql-connector-java:8.0.20'
+    implementation "io.jsonwebtoken:jjwt:0.6.0"
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compile 'org.projectlombok:lombok:1.18.8'
+    implementation 'junit:junit:4.12'
+    implementation project(':common')
+}

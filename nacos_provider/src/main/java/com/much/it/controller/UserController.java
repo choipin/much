@@ -68,4 +68,11 @@ public class UserController {
         return userService.findByPage(pageParam);
     }
 
+    @Decrypt
+    @Encrypt
+    @PostMapping("/encrypParam")
+    public PageParam encrypParam(@Validated @RequestBody PageParam pageParam) {
+        return pageParam;
+    }
+
 }

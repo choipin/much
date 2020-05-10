@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.SysAccountMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.much.it.entity.SysAccount">
+        <id column="ID" property="id" />
+        <result column="ACCOUNT" property="account" />
+        <result column="USERNAME" property="username" />
+        <result column="PASSWORD" property="password" />
+        <result column="LOGIN_TIME" property="loginTime" />
+        <result column="LOGIN_IP" property="loginIp" />
+        <result column="TESTER" property="tester" />
+        <result column="CREATE_DATE" property="createDate" />
+        <result column="LASTUPDATE_DATE" property="lastupdateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, ACCOUNT, USERNAME, PASSWORD, LOGIN_TIME, LOGIN_IP, TESTER, CREATE_DATE, LASTUPDATE_DATE
+    </sql>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.BusCaseMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.much.it.entity.BusCase">
+        <id column="ID" property="id" />
+        <result column="ACCOUNT_ID" property="accountId" />
+        <result column="ROLE" property="role" />
+        <result column="TITLE" property="title" />
+        <result column="MEDICAL_CASE" property="medicalCase" />
+        <result column="REPAIR_CASE" property="repairCase" />
+        <result column="REVIEW_TOTAL" property="reviewTotal" />
+        <result column="COLLECT_TOTAL" property="collectTotal" />
+        <result column="PIC_FRONT" property="picFront" />
+        <result column="PIC_LEFT" property="picLeft" />
+        <result column="PIC_RIGHT" property="picRight" />
+        <result column="CASE_BEGIN_TIME" property="caseBeginTime" />
+        <result column="LASTUPDATE_DATE" property="lastupdateDate" />
+        <result column="CREATE_DATE" property="createDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, ACCOUNT_ID, ROLE, TITLE, MEDICAL_CASE, REPAIR_CASE, REVIEW_TOTAL, COLLECT_TOTAL, PIC_FRONT, PIC_LEFT, PIC_RIGHT, CASE_BEGIN_TIME, LASTUPDATE_DATE, CREATE_DATE
+    </sql>
+
+</mapper>

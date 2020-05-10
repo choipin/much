@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.SysPropertyMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.much.it.entity.SysProperty">
+        <id column="ID" property="id" />
+        <result column="PROPERTY_KEY" property="propertyKey" />
+        <result column="PROPERTY_VALUE" property="propertyValue" />
+        <result column="PROPERTY_DESC" property="propertyDesc" />
+        <result column="CREATE_DATE" property="createDate" />
+        <result column="CREATE_BY" property="createBy" />
+        <result column="LASTUPDATE_DATE" property="lastupdateDate" />
+        <result column="LASTUPDATE_BY" property="lastupdateBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, PROPERTY_KEY, PROPERTY_VALUE, PROPERTY_DESC, CREATE_DATE, CREATE_BY, LASTUPDATE_DATE, LASTUPDATE_BY
+    </sql>
+
+</mapper>

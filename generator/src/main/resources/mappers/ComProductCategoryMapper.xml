@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.ComProductCategoryMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.much.it.entity.ComProductCategory">
+        <id column="ID" property="id" />
+        <result column="CODE" property="code" />
+        <result column="ICON" property="icon" />
+        <result column="LOGO" property="logo" />
+        <result column="NAME" property="name" />
+        <result column="ALIAS" property="alias" />
+        <result column="REMARK" property="remark" />
+        <result column="ON_LINE" property="onLine" />
+        <result column="PARENT_ID" property="parentId" />
+        <result column="LEVEL" property="level" />
+        <result column="SORT_INDEX" property="sortIndex" />
+        <result column="LASTUPDATE_DATE" property="lastupdateDate" />
+        <result column="CREATE_DATE" property="createDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, CODE, ICON, LOGO, NAME, ALIAS, REMARK, ON_LINE, PARENT_ID, LEVEL, SORT_INDEX, LASTUPDATE_DATE, CREATE_DATE
+    </sql>
+
+</mapper>

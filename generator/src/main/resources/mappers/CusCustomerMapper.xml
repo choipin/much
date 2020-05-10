@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.much.it.mapper.CusCustomerMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.much.it.entity.CusCustomer">
+        <id column="ID" property="id" />
+        <result column="ACCOUNT_ID" property="accountId" />
+        <result column="ICON" property="icon" />
+        <result column="NAME" property="name" />
+        <result column="QUESTION_FILLED" property="questionFilled" />
+        <result column="QQ" property="qq" />
+        <result column="MOBILE" property="mobile" />
+        <result column="GENDER" property="gender" />
+        <result column="BORN_DATE" property="bornDate" />
+        <result column="NATION" property="nation" />
+        <result column="BORN_ADDRESS" property="bornAddress" />
+        <result column="CAR_INFO" property="carInfo" />
+        <result column="LASTUPDATE_DATE" property="lastupdateDate" />
+        <result column="CREATE_DATE" property="createDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, ACCOUNT_ID, ICON, NAME, QUESTION_FILLED, QQ, MOBILE, GENDER, BORN_DATE, NATION, BORN_ADDRESS, CAR_INFO, LASTUPDATE_DATE, CREATE_DATE
+    </sql>
+
+</mapper>
