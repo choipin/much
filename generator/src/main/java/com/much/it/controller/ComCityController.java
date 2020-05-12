@@ -1,8 +1,8 @@
 package com.much.it.controller;
 
 
+import com.much.it.dto.PageParam;
 import com.much.it.entity.ComCity;
-import com.much.it.entity.PageParam;
 import com.much.it.service.ComCityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

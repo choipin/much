@@ -1,8 +1,8 @@
 package com.much.it.service;
 
-import com.much.it.entity.ComCity;
 import com.baomidou.mybatisplus.service.IService;
-import com.much.it.entity.PageParam;
+import com.much.it.dto.PageParam;
+import com.much.it.entity.ComCity;
 
 import java.util.List;
 
