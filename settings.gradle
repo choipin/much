@@ -6,4 +6,5 @@ include 'seata'
 include 'netty'
 include 'authen2'
 include 'generator'
+include 'shardingphere'
 

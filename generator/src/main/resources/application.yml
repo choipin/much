@@ -19,7 +19,88 @@ spring:
     username: ENC(D+yPsj5l/Lke7U7egn8BnQ==)
     password: ENC(D+yPsj5l/Lke7U7egn8BnQ==)
 
+  shardingsphere:
+    datasource:
+      names: much
+      much:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/much?characterEncoding=utf8&allowMulitQueries=ture&useSSL=false&serverTimezone=UTC
+        username: ENC(D+yPsj5l/Lke7U7egn8BnQ==)
+        password: ENC(D+yPsj5l/Lke7U7egn8BnQ==)
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+            merge-sql: true
+          wall:
+            config:
+              multi-statement-allow: true
+#    encrypt:
+#      encryptors:
+#        encryptor_aes:
+#          type: aes
+#          props:
+#            aes.key.value: Psj5lLke7U9n8BnQ
+    sharding:
+      encrypt-rule:
+        encryptors:
+          aes_encryptor:
+            type: aes
+            props:
+              aes.key.value: Psj5lLke7U9n8BnQ
+      tables:
+        com_city:
+          columns:
+            code:
+              cipherColumn: code
+              encryptor: aes_encryptor
+              plainColumn: code_aes
+            name:
+              cipherColumn: name
+              encryptor: aes_encryptor
+              plainColumn: name_aes
+            name_py:
+              cipherCoulumn: mane_py
+              encryptor: aes_encryptor
+              plainColumn: mane_py_aes
+            ON_LINE:
+              cipherCoulumn: ON_LINE
+              encryptor: aes_encryptor
+              plainColumn: ON_LINE_aes
+            HOT_EXTENT:
+              cipherCoulumn: HOT_EXTENT
+              encryptor: aes_encryptor
+              plainColumn: HOT_EXTENT_aes
+            YY_AUTH_COUNT:
+              cipherCoulumn: YY_AUTH_COUNT
+              encryptor: aes_encryptor
+              plainColumn: YY_AUTH_COUNT_aes
+            LASTUPDATE_DATE:
+              cipherCoulumn: LASTUPDATE_DATE
+              encryptor: aes_encryptor
+              plainColumn: LASTUPDATE_DATE_aes
+            CREATE_DATE:
+              cipherCoulumn: CREATE_DATE
+              encryptor: aes_encryptor
+              plainColumn: CREATE_DATE_aes
+    props:
+      sql:
+        show: true
+      query:
+        with:
+          cipher:
+            column: true
 
+
+
+jasypt:
+  encryptor:
+    password: Y5kScmS3D9mWQ
+
+#  Psj5lLke7U9n8BnQ
+#  SELECT to_base64(AES_ENCRYPT("wenxin","Psj5lLke7U9n8BnQ"));
+#  SELECT AES_DECRYPT(from_base64('THvPQR9ygFzdhSrdA1XxSw=='),'Psj5lLke7U9n8BnQ');
 rsa:
   encrypt:
     open: true

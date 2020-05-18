@@ -4,12 +4,13 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -21,6 +22,8 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("com_city")
 public class ComCity extends Model<ComCity> {
@@ -51,23 +54,23 @@ public class ComCity extends Model<ComCity> {
     /**
      * 是否上线。1-是；0-否
      */
-    private Integer onLine;
+    private String onLine;
     /**
      * 热门度。值越大，热门度越高
      */
-    private Integer hotExtent;
+    private String hotExtent;
     /**
      * 当前城市认证大咖数量（非真实数据，随机产生【待确定随机范围】）
      */
-    private Integer yyAuthCount;
+    private String yyAuthCount;
     /**
      * 最后更新时间
      */
-    private Date lastupdateDate;
+    private String lastupdateDate;
     /**
      * 创建时间
      */
-    private Date createDate;
+    private String createDate;
 
 
     @Override

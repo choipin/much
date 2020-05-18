@@ -23,4 +23,6 @@ public class Title implements Serializable {
     private String title;
     private Date fromDate;
     private Date toDate;
+
+
 }
